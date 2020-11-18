@@ -3,8 +3,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
 
+
 const categoriesController = require('./controllers/CategoriesController');
 const articlesController = require('./controllers/ArticlesController');
+
+const Article = require('./models/Article');
+const Category = require('./models/Category');
 //Database
 connection
     .authenticate()
@@ -17,6 +21,8 @@ connection
 
 //Usando EJS como view engine para html
 app.set('view engine','ejs');
+
+//Static
 app.use(express.static('public'));
 
 //Usando body-parser para converter dados de requisição de formulário para JSON
