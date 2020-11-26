@@ -1,14 +1,17 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
 
-
+//importa os controllers
 const categoriesController = require('./controllers/CategoriesController');
 const articlesController = require('./controllers/ArticlesController');
 
+//importa as models
 const Article = require('./models/Article');
 const Category = require('./models/Category');
+
 //Database
 connection
     .authenticate()
