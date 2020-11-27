@@ -21,6 +21,7 @@
         "g",
         "gpamo",
         "gu",
+        "guiapress",
         "h",
         "ht",
         "https",
@@ -66,5 +67,8 @@
         "zh",
         "zp",
         "zy"
+    ],
+    "cSpell.words": [
+        "deletar"
     ]
 }
