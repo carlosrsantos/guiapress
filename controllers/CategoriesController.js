@@ -7,12 +7,14 @@ router.get("/admin/categories/new", (req, res)=>{
     res.render('admin/categories/new');
 });
 
+
+//Insert Category
 router.post("/categories/save", (req, res)=>{
     var title = req.body.title;
     if(title != undefined){
 
         Category.create({
-            title: title,
+            title,
             slug: slugify(title) 
         }).then(()=>{
             res.redirect("/admin/categories");
@@ -23,6 +25,7 @@ router.post("/categories/save", (req, res)=>{
     }
 });
 
+//Update Category
 router.post("/categories/update", (req, res)=>{
     var id = req.body.id;
     var title = req.body.title;
@@ -38,6 +41,7 @@ router.post("/categories/update", (req, res)=>{
     }
 });
 
+//
 router.get("/admin/categories", (req, res) =>{
 
     Category.findAll().then(categories => {
@@ -45,6 +49,7 @@ router.get("/admin/categories", (req, res) =>{
     });
 });
 
+//Delete Category
 router.post("/categories/delete", (req, res)=>{
     var id = req.body.id;
     if(id != undefined){
