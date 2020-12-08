@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Category = require('../models/Category');
+const Article = require('../models/Article');
 const slugify = require('slugify')
 
 router.get("/admin/categories/new", (req, res)=>{
@@ -41,7 +42,7 @@ router.post("/categories/update", (req, res)=>{
     }
 });
 
-//
+//List All Categories
 router.get("/admin/categories", (req, res) =>{
 
     Category.findAll().then(categories => {
@@ -54,22 +55,29 @@ router.post("/categories/delete", (req, res)=>{
     var id = req.body.id;
     if(id != undefined){
         if(!isNaN(id)){
+            Article.destroy({
+                where: {
+                    categoryId: id
+                }
+            });            
+
 
             Category.destroy({
                 where: {
-                    id
+                    id: id
                 }
             }).then(()=>{
-                res.redirect("admin/categories");
+                res.redirect("/admin/categories");
             })
         }else{ //not number
-            res.redirect("admin/categories");
+            res.redirect("/admin/categories");
         }
     }else{ //NULL
-        res.redirect("admin/categories");
+        res.redirect("/admin/categories");
     }
 });
 
+//Edit Category
 router.get("/admin/categories/edit/:id",(req, res)=>{
     var id = req.params.id;
     
