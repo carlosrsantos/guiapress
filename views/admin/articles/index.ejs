@@ -3,7 +3,7 @@
 
 <div class="container">
     <hr>
-    <h2>Categorias</h2>
+    <h2>Artigos</h2>
     <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
     <hr>
     <table class="table table-bordered">
@@ -30,7 +30,7 @@
                         <% } %>           
                 </td>
                 <td>
-                    <a class="btn btn-warning" href="/admin/articles/edit/<%= articles.id %>">Editar</a>
+                    <a class="btn btn-warning" style="display: inline;" href="/admin/articles/edit/<%= articles.id %>">Editar</a>
                     <form method="POST" action="/articles/delete" style="display: inline;" onsubmit="confirmDeleting(event, this)">
                         <input type="hidden" name="id" value="<%= article.id %>">
                         <button class="btn btn-danger">Deletar</button>

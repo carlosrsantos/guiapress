@@ -16,7 +16,7 @@ router.post("/categories/save", (req, res)=>{
 
         Category.create({
             title,
-            slug: slugify(title) 
+            slug: slugify(title.toLowerCase()) 
         }).then(()=>{
             res.redirect("/admin/categories");
         });
@@ -32,7 +32,7 @@ router.post("/categories/update", (req, res)=>{
     var title = req.body.title;
     
     if(title != undefined){
-        Category.update({title: title, slug: slugify(title) },{
+        Category.update({title: title, slug: slugify(title.toLowerCase()) },{
             where: {
                 id: id
             }
@@ -55,11 +55,11 @@ router.post("/categories/delete", (req, res)=>{
     var id = req.body.id;
     if(id != undefined){
         if(!isNaN(id)){
-            Article.destroy({
+          /*   Article.destroy({
                 where: {
                     categoryId: id
                 }
-            });            
+            });       */      
 
 
             Category.destroy({

@@ -26,7 +26,7 @@ router.post('/articles/save', (req, res)=>{
 
     Article.create({
         title,
-        slug: slugify(title),
+        slug: slugify(title.toLowerCase()),
         body,
         categoryId: category
     }).then(()=>{
