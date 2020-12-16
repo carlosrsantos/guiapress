@@ -1,10 +1,52 @@
 <%- include ('../../partials/header.ejs') %>
+<%- include ('../../partials/navbar.ejs') %>
 
-<body>
-
-    <h2>TESTANDO ...</h2>
-
-</body>
+<div class="container">
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h2>Novo Artigo</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/articles/save">
+                <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo">
+                <br>
+                <textarea name="body" id="article" rows="10" class="form-control" placeholder="Escreva aqui o artigo"></textarea>
+                <br>
+                <label>Categoria</label>
+                <select name="category" class="form-control">
+                    <% categories.forEach((category) => { %>
+                        <option value="<%= category.id %>"><%= category.title %></option>
+                    <% }) %>
+                </select>
+                <br>
+                <button name="insert" class="btn btn-success">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <%- include ('../../partials/footer.ejs') %>
 
+<script src="/tinymce/tinymce.min.js" ></script>
+
+<script>
+    tinymce.init({
+        language: 'pt_BR',
+        selector: '#article',
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    });
+
+    var title = document.querySelector('input[name=title]');
+    var btn = document.querySelector('button[name=insert]');
+
+    btn.onclick = function () {
+        if (title.value == "") {
+            alert("Esse campo não pode ser vazio!");
+            title.focus();
+            return false;
+        }
+    }
+</script>
