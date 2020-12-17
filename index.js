@@ -3,14 +3,17 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
+const session = require('express-session')
 
 //importa os controllers
 const categoriesController = require('./controllers/CategoriesController');
 const articlesController = require('./controllers/ArticlesController');
+const usersController = require('./controllers/UsersController');
 
 //importa as models
 const Article = require('./models/Article');
 const Category = require('./models/Category');
+const User = require('./models/User');
 
 //Database
 connection
@@ -25,6 +28,11 @@ connection
 //Usando EJS como view engine para html
 app.set('view engine','ejs');
 
+//Sessions
+app.use(session({
+    secret: "something", cookie: { maxAge: 30000}
+}));
+
 //Static
 app.use(express.static('public'));
 
@@ -35,6 +43,7 @@ app.use(bodyParser.json()); //leia dados de formulário enviados via JSON
 //Rotas
 app.use('/', categoriesController); // /prefixo
 app.use('/', articlesController);
+app.use('/', usersController);
 
 app.get('/', (req, res)=>{
     Article.findAll({
