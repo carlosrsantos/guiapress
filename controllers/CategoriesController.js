@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Category = require('../models/Category');
 const Article = require('../models/Article');
-const slugify = require('slugify')
+const slugify = require('slugify');
+const adminAuth = require('../middlewares/adminAuth');
 
-router.get("/admin/categories/new", (req, res)=>{
+router.get("/admin/categories/new", adminAuth, (req, res)=>{
     res.render('admin/categories/new');
 });
 
@@ -27,7 +28,7 @@ router.post("/categories/save", (req, res)=>{
 });
 
 //Edit Category
-router.get("/admin/categories/edit/:id",(req, res)=>{
+router.get("/admin/categories/edit/:id", adminAuth, (req, res)=>{
     var id = req.params.id;
     
     if(isNaN(id)){
@@ -66,7 +67,7 @@ router.post("/categories/update", (req, res)=>{
 });
 
 //List All Categories
-router.get("/admin/categories", (req, res) =>{
+router.get("/admin/categories", adminAuth, (req, res) =>{
 
     Category.findAll().then(categories => {
         res.render("admin/categories/index", {categories: categories});
