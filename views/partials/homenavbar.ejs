@@ -6,21 +6,26 @@
     <ul class="navbar-nav mr-auto">
          <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
-         </li>
-           <class class="dropdown"></class>
-                 <li class="nav-item dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">               
+         </li>         
+           <!-- <div class="dropdown">
+                 <div class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">               
                     Categorias
-                    <span class="caret"></span>
-                    
-                <ul class="dropdown-menu bg-primary" aria-labelledby="dropdownMenu1">
-                    <% categories.forEach(category => { %>
-                        <li><a style="color:#eceff1;" href="/category/<%= category.slug %>"><%= category.title %></a></li>
-                    <% }) %>
-                   
-                </ul>
-            </div>
-        </li> 
-           
+                    <span class="caret"></span>                    
+                    <ul class="dropdown-menu bg-primary" aria-labelledby="dropdownMenu1">
+                        <% categories.forEach(category => { %>
+                            <li><a style="color:#eceff1;" href="/category/<%= category.slug %>"><%= category.title %></a></li>
+                        <% }) %>                   
+                    </ul>
+                </div>
+            </div> -->
+            <% categories.forEach(category=> { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/<%= category.slug %>">
+                            <%= category.title %>
+                    </a>
+                </li> 
+                <% }) %>
+                 
                
     </ul>
 </nav>
